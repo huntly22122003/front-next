@@ -5,7 +5,7 @@ export default function WelcomePage() {
   const [msg, setMsg] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/hello")
+    fetch("https://luana-unpenetrative-fumiko.ngrok-free.dev/hello")
       .then(async (res) => {
         const text = await res.text();
         console.log("Raw response:", text);
