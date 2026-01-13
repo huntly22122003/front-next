@@ -13,7 +13,6 @@ export default function WelcomePage() {
         "ngrok-skip-browser-warning": "true",
         "Accept": "application/json",
       },
-      credentials: "include",
     })
       .then(async (res) => {
         const text = await res.text();
