@@ -13,6 +13,7 @@ export default function CheckShopifyClient() {
   const [session, setSession] = useState<SessionData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showExport, setShowExport] = useState(false); // ✅ thêm đúng 1 dòng
 
   useEffect(() => {
     fetch(
@@ -60,11 +61,27 @@ export default function CheckShopifyClient() {
             </div>
           </div>
 
-          {/* SPA EXPORT */}
-          <BulkExport
-            exportUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/bulk/products/export"
-            searchUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/bulk/products/search"
-          />
+          {/* 🔘 NÚT BẬT / TẮT */}
+          <button
+            onClick={() => setShowExport((v) => !v)}
+            style={{
+              marginTop: 20,
+              padding: "8px 16px",
+              borderRadius: 8,
+              border: "1px solid #ccc",
+              cursor: "pointer",
+            }}
+          >
+            {showExport ? "❌ Hide Bulk Export" : "📦 Show Bulk Export"}
+          </button>
+
+          {/* 🔽 CHỈ RENDER KHI BẤM */}
+          {showExport && (
+            <BulkExport
+              exportUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/bulk/products/export"
+              searchUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/bulk/products/search"
+            />
+          )}
         </>
       )}
     </main>
