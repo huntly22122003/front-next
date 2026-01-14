@@ -23,7 +23,7 @@ export default function Page() {
       {view === "products" && (
         <section className={styles.section}>
           <ProductsPanel
-            productsUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/products"
+            productsUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/api/products"
           />
         </section>
       )}
