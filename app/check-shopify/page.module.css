@@ -208,3 +208,49 @@
   background: #f1b6ac;
   cursor: not-allowed;
 }
+
+/* ===== Table Actions ===== */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Edit button */
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #f1f2f3;
+  color: #202223;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.actionButton:hover {
+  background: #e3e5e7;
+}
+
+/* Soft delete (danger – nhẹ) */
+.softDeleteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  background: #fdecea;
+  color: #d72c0d;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.softDeleteButton:hover {
+  background: #f9d4cf;
+}

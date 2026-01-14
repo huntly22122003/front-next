@@ -129,8 +129,8 @@ export default function ProductsPanel({ productsUrl }: Props) {
               <td>{p.title}</td>
               <td>{p.variants?.[0]?.price ?? "-"}</td>
               <td>
-                <button onClick={() => setEditingProduct(p)}>✏ Edit</button>
-                <button onClick={() => softDelete(p.id)}>🗑 Soft</button>
+                <button className={styles.actionButton} onClick={() => setEditingProduct(p)}>✏ Edit</button>
+                <button className={styles.softDeleteButton} onClick={() => softDelete(p.id)}>🗑 Soft Delete</button>
               </td>
             </tr>
           ))}
