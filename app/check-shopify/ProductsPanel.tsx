@@ -23,61 +23,70 @@ type Props = {
 export default function ProductsPanel({ productsUrl }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
   const [showCreate, setShowCreate] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
-  const loadProducts = () => {
+  const loadProducts = async () => {
     setLoading(true);
-    setError(null);
 
-    fetch(productsUrl, {
+    const res = await fetch(productsUrl, {
       headers: {
         Accept: "application/json",
         "ngrok-skip-browser-warning": "true",
       },
       credentials: "include",
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error();
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data.products ?? []);
-        setLoading(false);
-      })
-      .catch(() => {
-        setError("❌ Không load được products");
-        setLoading(false);
-      });
+    });
+
+    const data = await res.json();
+    setProducts(data.products ?? []);
+    setLoading(false);
   };
 
   useEffect(() => {
     loadProducts();
   }, [productsUrl]);
 
-  if (loading) return <p className={styles.loading}>Loading products…</p>;
-  if (error) return <p className={styles.error}>{error}</p>;
+  const softDelete = async (id: number) => {
+    if (!confirm("Soft delete product này?")) return;
+
+    const res = await fetch(
+      "https://luana-unpenetrative-fumiko.ngrok-free.dev/api/products/soft",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "ngrok-skip-browser-warning": "true",
+        },
+        credentials: "include",
+        body: JSON.stringify({ id }),
+      }
+    );
+
+    if (!res.ok) {
+      alert("Soft delete failed");
+      return;
+    }
+
+    loadProducts();
+  };
+
+  if (loading) return <p>Loading…</p>;
 
   return (
     <section className={styles.section}>
-      {/* HEADER */}
-      <div className={styles.sectionHeader}>
-        <h2 className={styles.sectionTitle}>📦 Products</h2>
+      <h2>📦 Products</h2>
 
-        <button
-          className={styles.button}
-          onClick={() => {
-            setShowCreate((v) => !v);
-            setEditingProduct(null);
-          }}
-        >
-          {showCreate ? "✖ Close" : "➕ New Product"}
-        </button>
-      </div>
+      <button
+        className={styles.button}
+        onClick={() => {
+          setShowCreate(!showCreate);
+          setEditingProduct(null);
+        }}
+      >
+        ➕ New Product
+      </button>
 
-      {/* CREATE */}
       {showCreate && (
         <ProductsCreate
           createUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/api/products"
@@ -88,7 +97,6 @@ export default function ProductsPanel({ productsUrl }: Props) {
         />
       )}
 
-      {/* UPDATE */}
       {editingProduct && (
         <ProductsUpdate
           product={{
@@ -105,50 +113,29 @@ export default function ProductsPanel({ productsUrl }: Props) {
         />
       )}
 
-      {/* TABLE */}
-      <div className={styles.tableWrapper}>
-        <table className={styles.table}>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Title</th>
-              <th>Vendor</th>
-              <th>Price</th>
-              <th>Action</th>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((p) => (
+            <tr key={p.id}>
+              <td>{p.id}</td>
+              <td>{p.title}</td>
+              <td>{p.variants?.[0]?.price ?? "-"}</td>
+              <td>
+                <button onClick={() => setEditingProduct(p)}>✏ Edit</button>
+                <button onClick={() => softDelete(p.id)}>🗑 Soft</button>
+              </td>
             </tr>
-          </thead>
-
-          <tbody>
-            {products.map((p) => (
-              <tr key={p.id}>
-                <td>{p.id}</td>
-                <td>{p.title}</td>
-                <td>{p.vendor ?? "-"}</td>
-                <td>{p.variants?.[0]?.price ?? "-"}</td>
-                <td>
-                  <button
-                    className={styles.button}
-                    onClick={() => {
-                      setEditingProduct(p);
-                      setShowCreate(false);
-                    }}
-                  >
-                    ✏ Edit
-                  </button>
-                </td>
-              </tr>
-            ))}
-
-            {!products.length && (
-              <tr>
-                <td colSpan={5} className={styles.empty}>
-                  No products
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </section>
   );
 }

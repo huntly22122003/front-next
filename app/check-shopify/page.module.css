@@ -181,3 +181,30 @@
   font-style: italic;
   margin-top: 12px;
 }
+/* ===== Danger Button ===== */
+.dangerButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  background: #d72c0d;
+  color: #ffffff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.dangerButton:hover {
+  background: #c5280c;
+}
+
+.dangerButton:active {
+  transform: translateY(1px);
+}
+
+.dangerButton:disabled {
+  background: #f1b6ac;
+  cursor: not-allowed;
+}
