@@ -25,7 +25,6 @@ type Props = {
 export default function ProductsPanel({ productsUrl }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showCreate, setShowCreate] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
   const [openVariants, setOpenVariants] = useState<number | null>(null);
   const [createVariantFor, setCreateVariantFor] = useState<number | null>(null);
@@ -79,26 +78,6 @@ export default function ProductsPanel({ productsUrl }: Props) {
   return (
     <section className={styles.section}>
       <h2>📦 Products</h2>
-
-      <button
-        className={styles.button}
-        onClick={() => {
-          setShowCreate(!showCreate);
-          setEditingProduct(null);
-        }}
-      >
-        ➕ New Product
-      </button>
-
-      {showCreate && (
-        <ProductsCreate
-          createUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/api/products"
-          onCreated={() => {
-            setShowCreate(false);
-            loadProducts();
-          }}
-        />
-      )}
 
       {editingProduct && (
         <ProductsUpdate

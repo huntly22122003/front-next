@@ -8,13 +8,14 @@ import ProductsPanel from "./ProductsPanel";
 import HardDeletePanel from "./HardDeletePanel";
 import OrderWebhooks from "./OrderWebhooks";
 import styles from "./page.module.css";
-
+import ProductsCreate from "./ProductsCreate";
 type View =
   | "products"
   | "import"
   | "export"
   | "hardDelete"
   | "order-webhooks"
+  | "create-product"
   | null;
 
 export default function Page() {
@@ -32,6 +33,7 @@ export default function Page() {
         onToggleExport={() => toggleView("export")}
         onShowHardDelete={() => toggleView("hardDelete")}
         onShowOrderWebhooks={() => toggleView("order-webhooks")}
+        onCreateProduct={() => toggleView("create-product")}
       />
 
       {view === "products" && (
@@ -41,6 +43,16 @@ export default function Page() {
           />
         </section>
       )}
+
+      {view === "create-product" && (
+        <section className={styles.section}>
+          <ProductsCreate
+            createUrl="https://luana-unpenetrative-fumiko.ngrok-free.dev/api/products"
+            onCreated={() => setView("create-product")}
+          />
+        </section>
+      )}
+
 
       {view === "export" && (
         <section className={styles.section}>

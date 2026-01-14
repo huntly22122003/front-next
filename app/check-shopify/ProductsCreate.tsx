@@ -58,6 +58,10 @@ export default function CreateProductForm({ createUrl, onCreated }: Props) {
 
   return (
     <section className={styles.createProduct}>
+      <div className={styles.createHeader}>
+        <h2 className={styles.createHeader}>➕ Create Product</h2>
+      </div>
+
       <div className={styles.createFields}>
         <input
           className={styles.createInput}
