@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import ProductsCreate from "./ProductsCreate";
 import ProductsUpdate from "./ProductsUpdate";
+import VariantPanel from "./VariantPanel";
+import VariantCreate from "./VariantCreate";
 
 type Variant = {
   price?: string;
@@ -25,7 +27,8 @@ export default function ProductsPanel({ productsUrl }: Props) {
   const [loading, setLoading] = useState(true);
   const [showCreate, setShowCreate] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-
+  const [openVariants, setOpenVariants] = useState<number | null>(null);
+  const [createVariantFor, setCreateVariantFor] = useState<number | null>(null);
   const loadProducts = async () => {
     setLoading(true);
 
@@ -113,6 +116,11 @@ export default function ProductsPanel({ productsUrl }: Props) {
         />
       )}
 
+      {openVariants && (<VariantPanel productId={openVariants} onClose={() => setOpenVariants(null)} />)}
+
+      {createVariantFor && (<VariantCreate productId={createVariantFor}onDone={() => {setCreateVariantFor(null);}} onCancel={() => setCreateVariantFor(null)}/>)}
+
+
       <table className={styles.table}>
         <thead>
           <tr>
@@ -130,7 +138,9 @@ export default function ProductsPanel({ productsUrl }: Props) {
               <td>{p.variants?.[0]?.price ?? "-"}</td>
               <td>
                 <button className={styles.actionButton} onClick={() => setEditingProduct(p)}>✏ Edit</button>
+                <button className={styles.actionButton} onClick={() => setOpenVariants(p.id)}>📦 Variants</button>
                 <button className={styles.softDeleteButton} onClick={() => softDelete(p.id)}>🗑 Soft Delete</button>
+                <button className={styles.primaryButton} onClick={() => setCreateVariantFor(p.id)}>➕ Variant</button>
               </td>
             </tr>
           ))}

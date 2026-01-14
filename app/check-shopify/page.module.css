@@ -254,3 +254,218 @@
 .softDeleteButton:hover {
   background: #f9d4cf;
 }
+
+.createRow {
+  background: #f6f6f7;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.primaryButton {
+  background: #008060;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.dangerButton {
+  background: #d72c0d;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+/* ===== Variant Form ===== */
+
+.form {
+  max-width: 420px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+.form h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  color: #374151;
+  margin-bottom: 10px;
+}
+
+.form input {
+  margin-top: 4px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+}
+
+.form input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.primaryButton {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.primaryButton:hover {
+  background: #1d4ed8;
+}
+
+.cancelButton {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.cancelButton:hover {
+  background: #f3f4f6;
+}
+
+/* ===== Variant Panel Header ===== */
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 10px 12px;
+  margin-bottom: 12px;
+
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+}
+
+.panelTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.closeButton {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #6b7280;
+}
+
+.closeButton:hover {
+  color: #111827;
+}
+
+/* ================= Create Product Form ================= */
+
+.createProduct {
+  max-width: 420px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e1e3e5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.createHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.createTitle {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #202223;
+}
+
+.createFields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.createInput {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #c9cccf;
+  font-size: 14px;
+}
+
+.createInput:focus {
+  outline: none;
+  border-color: #5c6ac4;
+  box-shadow: 0 0 0 2px rgba(92, 106, 196, 0.15);
+}
+
+.createCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #202223;
+  margin-bottom: 14px;
+}
+
+.createActions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.createButton {
+  background: #008060;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.createButton:hover {
+  background: #006e52;
+}
+
+.createButton:disabled {
+  background: #c9cccf;
+  cursor: not-allowed;
+}
+
+.createError {
+  margin-top: 10px;
+  color: #d72c0d;
+  font-size: 14px;
+}
+
+.createSuccess {
+  margin-top: 10px;
+  color: #008060;
+  font-size: 14px;
+}

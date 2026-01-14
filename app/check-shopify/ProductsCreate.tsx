@@ -57,21 +57,17 @@ export default function CreateProductForm({ createUrl, onCreated }: Props) {
   };
 
   return (
-    <section className={styles.section}>
-      <div className={styles.sectionHeader}>
-        <h2 className={styles.sectionTitle}>➕ Create Product</h2>
-      </div>
-
-      <div className={styles.controls}>
+    <section className={styles.createProduct}>
+      <div className={styles.createFields}>
         <input
-          className={styles.input}
+          className={styles.createInput}
           placeholder="Product title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
 
         <input
-          className={styles.input}
+          className={styles.createInput}
           type="number"
           placeholder="0.00"
           value={price}
@@ -79,7 +75,7 @@ export default function CreateProductForm({ createUrl, onCreated }: Props) {
         />
       </div>
 
-      <label className={styles.row}>
+      <label className={styles.createCheckbox}>
         <input
           type="checkbox"
           checked={isNotifyActive}
@@ -87,17 +83,17 @@ export default function CreateProductForm({ createUrl, onCreated }: Props) {
         />
         <span style={{ marginLeft: 8 }}>Notify active</span>
       </label>
-
+    <div className={styles.createActions}>
       <button
-        className={styles.button}
+        className={styles.createButton}
         onClick={handleSubmit}
-        disabled={loading}
-      >
+        disabled={loading}>
         {loading ? "Creating..." : "Create Product"}
       </button>
+      </div>
 
-      {error && <p className={styles.error}>{error}</p>}
-      {success && <p className={styles.success}>{success}</p>}
+      {error && <p className={styles.createError}>{error}</p>}
+      {success && <p className={styles.createSuccess}>{success}</p>}
     </section>
   );
 }
