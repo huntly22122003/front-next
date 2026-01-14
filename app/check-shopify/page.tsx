@@ -6,28 +6,32 @@ import BulkExport from "./BulkExport";
 import BulkImport from "./BulkImport";
 import ProductsPanel from "./ProductsPanel";
 import HardDeletePanel from "./HardDeletePanel";
+import OrderWebhooks from "./OrderWebhooks";
 import styles from "./page.module.css";
 
-type View = "products" | "import" | "export" | "hardDelete" | null;
+type View =
+  | "products"
+  | "import"
+  | "export"
+  | "hardDelete"
+  | "order-webhooks"
+  | null;
 
 export default function Page() {
   const [view, setView] = useState<View>(null);
 
+  const toggleView = (name: View) => {
+    setView((v) => (v === name ? null : name));
+  };
+
   return (
     <main className={styles.container}>
       <CheckShopifyClient
-        onShowProducts={() =>
-          setView((v) => (v === "products" ? null : "products"))
-        }
-        onToggleImport={() =>
-          setView((v) => (v === "import" ? null : "import"))
-        }
-        onToggleExport={() =>
-          setView((v) => (v === "export" ? null : "export"))
-        }
-        onShowHardDelete={() =>
-          setView((v) => (v === "hardDelete" ? null : "hardDelete"))
-        }
+        onShowProducts={() => toggleView("products")}
+        onToggleImport={() => toggleView("import")}
+        onToggleExport={() => toggleView("export")}
+        onShowHardDelete={() => toggleView("hardDelete")}
+        onShowOrderWebhooks={() => toggleView("order-webhooks")}
       />
 
       {view === "products" && (
@@ -58,6 +62,12 @@ export default function Page() {
       {view === "hardDelete" && (
         <section className={styles.section}>
           <HardDeletePanel />
+        </section>
+      )}
+
+      {view === "order-webhooks" && (
+        <section className={styles.section}>
+          <OrderWebhooks />
         </section>
       )}
     </main>

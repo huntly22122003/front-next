@@ -13,6 +13,7 @@ type Props = {
   onToggleExport: () => void;
   onToggleImport: () => void;
   onShowHardDelete: () => void;
+  onShowOrderWebhooks: () =>void;
 };
 
 export default function CheckShopifyClient({
@@ -20,6 +21,7 @@ export default function CheckShopifyClient({
   onToggleExport,
   onToggleImport,
   onShowHardDelete,
+  onShowOrderWebhooks,
 }: Props) {
   const [session, setSession] = useState<SessionData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -73,13 +75,14 @@ export default function CheckShopifyClient({
             <button className={styles.button} onClick={onShowProducts}>
               🧾 Products
             </button>
-
             <button className={styles.button} onClick={onToggleExport}>
               📦 Bulk Export
             </button>
-
             <button className={styles.button} onClick={onToggleImport}>
               📥 Bulk Import
+            </button>
+            <button className={styles.button} onClick={onShowOrderWebhooks}>
+              📡 Order Webhooks
             </button>
             <button  className={styles.dangerButton} onClick={onShowHardDelete}>
               🔥 Hard Delete
