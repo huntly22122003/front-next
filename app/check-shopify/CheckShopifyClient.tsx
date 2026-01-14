@@ -9,11 +9,13 @@ type SessionData = {
 };
 
 type Props = {
+  onShowProducts: () => void;
   onToggleExport: () => void;
   onToggleImport: () => void;
 };
 
 export default function CheckShopifyClient({
+  onShowProducts,
   onToggleExport,
   onToggleImport,
 }: Props) {
@@ -22,12 +24,15 @@ export default function CheckShopifyClient({
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("https://luana-unpenetrative-fumiko.ngrok-free.dev/shopify/session-nextjs", {
-      headers: {
-        Accept: "application/json",
-        "ngrok-skip-browser-warning": "true",
-      },
-    })
+    fetch(
+      "https://luana-unpenetrative-fumiko.ngrok-free.dev/shopify/session-nextjs",
+      {
+        headers: {
+          Accept: "application/json",
+          "ngrok-skip-browser-warning": "true",
+        },
+      }
+    )
       .then((res) => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -56,12 +61,17 @@ export default function CheckShopifyClient({
               <span className={styles.label}>Shop:</span>
               <span className={styles.value}>{session.shop}</span>
             </div>
+
             <div className={styles.jsonBox}>
               <pre>{JSON.stringify(session.data, null, 2)}</pre>
             </div>
           </div>
 
           <div className={styles.controls}>
+            <button className={styles.button} onClick={onShowProducts}>
+              🧾 Products
+            </button>
+
             <button className={styles.button} onClick={onToggleExport}>
               📦 Bulk Export
             </button>
