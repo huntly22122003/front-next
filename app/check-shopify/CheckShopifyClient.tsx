@@ -48,7 +48,7 @@ export default function CheckShopifyClient({
         setLoading(false);
       })
       .catch(() => {
-        setError("❌ Không lấy được Shopify session");
+        setError("❌ Không lấy được Shopify session hoặc chưa chạy Backend");
         setLoading(false);
       });
   }, []);
