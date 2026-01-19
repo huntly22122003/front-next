@@ -39,7 +39,7 @@ export default function BulkImport({ importUrl }: BulkImportProps) {
           "Content-Type": "application/json",
           "Accept": "application/json", // ⭐ QUAN TRỌNG
         },
-        body: JSON.stringify({ products: productsJson, }),
+        body: JSON.stringify({ products: productsJson, }), //Ép chuỗi products thành dạng Json rồi gửi backend
       });
 
       if (!res.ok) {

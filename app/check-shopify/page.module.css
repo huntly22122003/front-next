@@ -469,3 +469,43 @@
   color: #008060;
   font-size: 14px;
 }
+
+
+/* ================= Toggle PreOrder ================= */
+.preorderOn {
+  background-color: #008060; /* Shopify green */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.preorderOn:hover:not(:disabled) {
+  background-color: #006e52;
+}
+
+.preorderOff {
+  background-color: #e1e3e5; /* Polaris gray */
+  color: #202223;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.preorderOff:hover:not(:disabled) {
+  background-color: #c9ccd1;
+}
+
+.preorderOn:disabled,
+.preorderOff:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
